@@ -1,0 +1,43 @@
+    
+.common-table{
+    .el-table{
+        margin-top:20px;
+        font-size:12px !important;
+        overflow: hidden;
+        width: 100%;
+        .cell{
+            padding:0 5px !important;
+            overflow: hidden;
+            // word-break: break-all;
+            // white-space: nowrap;
+            button{
+                padding:7px 10px !important;
+            }
+        }
+        table{
+            // width: auto !important;
+            // overflow-x: auto;
+            // overflow-y: hidden;
+        }
+        thead{
+            tr{
+                background-color:#eef1f6;
+                color:#000;
+                th{
+                    padding:8px 0;
+                }
+            }
+        }
+        tbody{
+            tr{
+                td{
+                    padding:5px 0;
+                }
+            }
+        }
+    }
+    .pagination{
+            text-align: center;
+    margin-top: 20px;
+    }
+}

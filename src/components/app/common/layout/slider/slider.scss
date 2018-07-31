@@ -1,0 +1,23 @@
+.nav-layout{
+    width:190px;
+	position:absolute;
+	top: 0;
+	left: 0;
+	padding-top: 60px;
+	height:100%;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	.el-menu-item{
+		min-width:175px !important;
+	}
+	.el-submenu__title i{
+		color: #fff;
+		margin-right: 5px;
+	}
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 190px;
+    min-height: 100%;
+ }

@@ -1,0 +1,88 @@
+
+
+//路由主体内容
+.common-wrap-container{
+    background-color:#fff;
+    font-size:14px;
+    box-sizing: border-box;
+}
+
+
+//面包削导航
+.el-breadcrumb{
+    background-color: #f7f7f7;
+    margin-bottom: 10px;
+}
+
+
+//页面标题 -- 黑色背景条的页面标题
+.common-header{
+    background-color: #2d303b;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    padding-left: 15px;
+    padding-right:10px;
+    overflow: hidden;
+    h3{
+        float: left;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    span{
+        float: right;
+    }
+    button{
+        float: right;
+        background-color: #fff;
+        outline: none;
+        border: 1px solid #d0d0d0;
+        line-height: 18px;
+        padding: 0 8px;
+        margin-top: 7px;
+        cursor: pointer;
+    }
+}
+
+
+//页面内容容器
+.common-container{
+    padding: 20px;
+}
+
+//内容展示面板
+.comman-pannel{
+    margin-bottom: 20px;
+    .pannel-header{
+        overflow: hidden;
+        border: 1px solid #ccc;
+        padding: 8px 10px;
+        background-color: #f2f2f2;
+        h5{
+            float: left;
+            font-weight: 400;
+        }
+    }
+    .pannel-container{
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 10px;
+        overflow: hidden;
+    }  
+}
+
+
+
+//公用字体颜色样式
+.red{
+    color: #ff0000 !important;
+}
+.orange{
+    color: orange !important;
+}
+.green{
+    color: green !important;
+}
+.yellow{
+    color: yellow !important;
+}
