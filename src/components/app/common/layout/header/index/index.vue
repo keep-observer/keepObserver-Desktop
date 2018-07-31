@@ -3,7 +3,7 @@
 
 		<div class="logo-header">
 			<img src="../../../../../../images/logo.png" alt="">
-			<span>共创森林<br>后台管理系统</span>
+			<span>keepObserver<br>平台台服务系统</span>
 		</div>
 
 		<el-menu

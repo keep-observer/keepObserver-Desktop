@@ -25,7 +25,7 @@ export default{
 			menuList:[
 				{
 					icoName: 'home',
-					name: '后台首页',
+					name: '首页统计',
 					idnexPageName: 'index',
 					children: [
 						{
@@ -61,24 +61,7 @@ export default{
 							]
 						},
 					]
-				},
-				{
-					icoName: 'line-chart',
-					name: 'GTC管理',
-					children: [
-						{
-							icoName: 'user-secret',
-							name: 'GTC管理',
-							children:[
-								{
-									icoName: '',
-									name: 'GTC列表',
-									link: ''
-								}
-							]
-						}
-					]
-				},
+				}
 			],
 			secondMenu: null,
 		}
@@ -90,7 +73,7 @@ export default{
 	created(){
 		//判断是否登录，没有登录就直接跳转到登录页
 		if(!dataStoreServer.getLongData('token')){
-			this.$router.push({name: 'login'})
+			// this.$router.push({name: 'login'})
 		}
 		this.secondMenu = this.menuList[0].children;
 	},

@@ -8,7 +8,7 @@ if(process.env.NODE_ENV === 'production'){
     var host = 'http://120.79.123.216:8080/qnche-admin'
 }else{
     //测试环境
-    var host = 'http://192.168.100.134:3000'
+    var host = 'http://api.pzhwangkai.com'
 }
 
 

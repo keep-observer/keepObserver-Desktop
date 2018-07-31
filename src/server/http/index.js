@@ -17,7 +17,7 @@ export default function request(config,callback){
             // withCredentials: true,
             timeout:30000,
             headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
+                'content-type': 'application/json;charset=UTF-8'
             },
         }
 
@@ -38,7 +38,7 @@ export default function request(config,callback){
             requestConfig.data = config.data
         }
         
-        // console.log(requestConfig)
+        console.log(requestConfig)
         // return;
 
 

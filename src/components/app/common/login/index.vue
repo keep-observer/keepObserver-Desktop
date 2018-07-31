@@ -3,18 +3,18 @@
         <div class="login-container">
             <img src="../../../../images/login.png" alt="">
             <div class="login-form">
-                <h1>在线监控品台服务系统</h1>
+                <h1>在线监控平台服务系统</h1>
                 <form name="loginForm" novalidate="novalidate" autocomplete="off">
                     <div class="form-group">
                         <i class="cicon icon-user-login"></i>
                         <div class="form-input">
-                            <input type="text" placeholder="请输入手机号码" v-model="userName" maxlength="11" minlength="11" />
+                            <input type="text" placeholder="请输入登录账号" v-model="userName" maxlength="11" minlength="11" />
                         </div>
                     </div>
                     <div class="form-group">
                         <i class="cicon icon-user-pwd"></i>
                         <div class="form-input">
-                            <input type="password" placeholder="请输入验证码" v-model="password"/>
+                            <input type="password" placeholder="请输入密码" v-model="password"/>
                             <!-- <span v-if="!hasSendVcode" @click="getVcode">获取验证码</span> -->
                             <!-- <span class="time" v-if="hasSendVcode">{{time}} 后重新获取验证码</span> -->
                         </div>

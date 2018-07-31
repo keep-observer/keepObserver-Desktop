@@ -14,5 +14,14 @@ export default {
         })
     },
 
+    
+    // 监控日志统计
+    indexStat: function(data){
+        return httpRequestServer({
+            method: 'GET',
+            url: '/admin/statistics/all',
+            data: data
+        })
+    },
 
 }
