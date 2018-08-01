@@ -5,7 +5,6 @@
 	      v-model="timeValue"
 	      type="daterange"
 	      align="left"
-	       size="mini"
 	      start-placeholder="开始日期"
 	      end-placeholder="结束日期"
       	  :picker-options="pickerOptions"

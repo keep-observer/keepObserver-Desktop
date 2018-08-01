@@ -12,7 +12,7 @@ import login from '@/components/app/common/login'
 import index from '@/components/app/index'
 
 //后台中心
-import adminCenter from '@/components/app/adminCenter/route'
+import projectCenter from '@/components/app/projectCenter/route'
 
 
 Vue.use(Router)
@@ -41,7 +41,7 @@ export default new Router({
                     title:'首页'
                 }
             },
-            ...adminCenter,
+            ...projectCenter,
             // ...userManage,
             // ...billManage,
             // ...systemManage,

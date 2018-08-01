@@ -22,19 +22,14 @@ export default function request(config,callback){
         }
 
 
+        if(dataStoreServer.getLongData('token')){
+            requestConfig.headers.authorization = dataStoreServer.getLongData('token').token
+        }
+
+
         if(config.method.toUpperCase() === 'GET' && config.data){
             requestConfig.params = config.data
-        }else if(config.method.toUpperCase() === 'PUT'){
-            //PUT DELETE 请求设置请求头和请求数据格式
-            requestConfig.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-            requestConfig.data = qs.stringify(config.data);
         }else if(config.data){
-            // formDate格式提交请求
-            /*var oData = new FormData();
-            for(var key in config.data){
-                oData.append(key, config.data[key]);
-            }
-            requestConfig.data = oData*/
             requestConfig.data = config.data
         }
         

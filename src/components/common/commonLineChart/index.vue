@@ -30,7 +30,9 @@ export default{
 
 	},
 	mounted(){
-		// this.initHighcharts()
+		this.initHighcharts();
+		// console.log(this.xAxis)
+		// console.log(this.listDate)
 	},
 	methods:{
 		//初始化height对象

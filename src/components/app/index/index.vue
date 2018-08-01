@@ -6,14 +6,12 @@
 			<el-button size="mini" icon="el-icon-refresh" @click="refresh">刷新</el-button>
 		</div>
 
-
-
-
-		<div class="common-container">
-			<div class="stat-item">
-				<h2>log</h2>
+		<div class="common-container index-stat">
+			<div class="stat-item" v-for="item in dateList">
+				<h2>{{item.title}}</h2>
 				<div class="line-content">
-					<common-line-chart></common-line-chart>
+					<p class="red tip" v-if="item.date.length === 0">没有统计数据</p>
+					<common-line-chart v-if="item.date.length > 0" :elId="item.title" :xAxis="item[item.title]" :listDate="item.date"></common-line-chart>
 				</div>
 			</div>
 		
@@ -26,114 +24,79 @@ import moment from "moment";
 import { MessageBox,Loading } from 'element-ui';
 
 import commonLineChart from '@/components/common/commonLineChart'
-import commonTable from '@/components/common/commonTable'
 
-// import { userModel } from '@/http/index.js'
+import { commonModel } from '@/http/index.js'
 import cacheRequestServices from '@/server/http/cache.js'
 
-import configDate from './configDate.js'
 
 
 export default{
 	name:'index',
 	data(){
 		return{
-			...configDate,
-
-			allStateDate:{},
-			dateList:[]
+			dateList:[]//四项统计数据
 		}
 	},
 	components:{
 		commonLineChart
 	},
 	created(){
-
+		this.getStatDate()
 	},
 	methods:{
 		getStatDate(){
 			var self = this;
-			self.allStateDate = {
-		        log : [
-		            {
-		                date:"2018-04-23",
-		                project:"qnz",
-		                count: 90,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"netcar",
-		                count: 110,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"qnche",
-		                count: 50,
-		            },
-		        ],
-		        vue : [
-		            {
-		                date:"2018-04-23",
-		                project:"qnz",
-		                count: 110,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"netcar",
-		                count: 110,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"qnche",
-		                count: 110,
-		            },
-		        ],
-		        error:[
-		            {
-		                date:"2018-04-23",
-		                project:"qnz",
-		                count: 110,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"netcar",
-		                count: 110,
-		            },
-		            {
-		                date:"2018-04-23",
-		                project:"qnche",
-		                count: 110,
-		            },
-		        ],
-		    }
+        	var loading = Loading.service({text:'加载中...'});
+            commonModel.indexStat().then(function(data){
+            	loading.close();
+                if(data.code === '00000'){
+                	var statList = data.data;
 
-			fruteArr: [],
-			fruteRateList: [{
-				name: '果实汇率',
-				data: []
-			}],
+                	for(var key in statList){
+				    	var item = {};
+				    	item.title = key;
+				    	// 统计项目
+				    	item[key] = [];//日期数组
+				    	item.date = [];//配置对象数组
 
+				    	if(Array.isArray(statList[key]) && statList[key].length > 0){
+				    		var firstData = statList[key][0]
+				    		for(var objKey in firstData.project){
+				    			item.date.push({
+				    				name: '',
+				    				data:[]
+				    			})
+				    		}
+				    	}
+				    	//这个循环生成 [{name:'',date:[]},{name:'',date:[]}]
+				    	for(var i = 0, len = statList[key].length; i < len; i++){
+				    		item[key].push(statList[key][i].date);					//日期数组添加项
+				    		var k = 0;
+				    		for(var objKey in statList[key][i].project){
+				    			item.date[k].name = objKey;
+				    			item.date[k].data.push(statList[key][i].project[objKey]);
+				    			k++;
+				    		}
+				    		
+				    	}
+				    	self.dateList.push(item)
+				    }
 
-		    for(var key in self.allStateDate){
-		    	var item = {};
-		    	item.title = key;
-		    	// item.date = self.allStateDate[key],
-		    	item[key] = [];
-
-		    	item.date = [];
-
-		    	for(var i = 0, len = self.allStateDate[key].length; i < len; i++){
-		    		item[key].push(self.allStateDate[key][i].date);
-		    		var lineList = {},
-		    		lineList.name = lineList.
-
-		    		item[key + 'List'].push(self.allStateDate[key][i].count)
-		    	}
-
-
-
-		    }
-		}
+                }else{
+                    MessageBox({
+                        title: '提示',
+                        type: 'error',
+                        message: data.message || '查询数据失败！',
+                        callback: function(){}
+                    })
+                    return false
+                }
+            })
+		},
+		//页面刷新
+		refresh(){
+			location.reload()
+		},
 
 
 	}

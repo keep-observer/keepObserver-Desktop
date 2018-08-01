@@ -73,6 +73,53 @@
 
 
 
+//共用切换tab样式
+.common-toggle-tab{
+    .tab-header{
+        border-bottom: 1px solid #ccc;
+        ul{
+            border: 1px solid #ccc;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0 ;
+            overflow: hidden;
+            position: relative;
+            top: 5px;
+            left: 0;
+            display: inline-block;
+            li{
+                float: left;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+                padding: 10px 20px;
+                cursor: pointer;
+                &:last-child{
+                    border-right: none;
+                }
+                &.active{
+                    color: #08c;
+                    border-bottom: 1px solid #fff;
+                }
+                &:hover{
+                    color: #08c;
+                }
+            }
+        }
+    }
+    .tab-comtent{
+        border: 1px solid #ccc;
+        border-top: none;
+        padding: 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
 //公用字体颜色样式
 .red{
     color: #ff0000 !important;

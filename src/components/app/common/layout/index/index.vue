@@ -27,7 +27,7 @@ export default{
 					icoName: 'home',
 					name: '首页统计',
 					idnexPageName: 'index',
-					children: [
+					/*children: [
 						{
 							icoName: 'address-book-o',
 							name: '用户管理',
@@ -39,24 +39,21 @@ export default{
 								}
 							]
 						},
+					]*/
+				},
+				{
+					icoName: 'home',
+					name: '项目',
+					idnexPageName: 'qnz',
+					children: [
 						{
-							icoName: 'life-saver',
-							name: '运营管理',
+							icoName: 'address-book-o',
+							name: '项目列表',
 							children:[
 								{
 									icoName: '',
-									name: '注入设置',
-									link: '/injectSet'
-								},
-								{
-									icoName: '',
-									name: '注入日志',
-									link: '/injectLog'
-								},
-								{
-									icoName: '',
-									name: '内容管理',
-									link: ''
+									name: '全能赚',
+									link: '/qnz'
 								}
 							]
 						},
