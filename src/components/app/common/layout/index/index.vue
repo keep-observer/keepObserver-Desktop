@@ -27,19 +27,6 @@ export default{
 					icoName: 'home',
 					name: '首页统计',
 					idnexPageName: 'index',
-					/*children: [
-						{
-							icoName: 'address-book-o',
-							name: '用户管理',
-							children:[
-								{
-									icoName: '',
-									name: '用户列表',
-									link: '/userList'
-								}
-							]
-						},
-					]*/
 				},
 				{
 					icoName: 'home',
@@ -70,7 +57,7 @@ export default{
 	created(){
 		//判断是否登录，没有登录就直接跳转到登录页
 		if(!dataStoreServer.getLongData('token')){
-			// this.$router.push({name: 'login'})
+			this.$router.push({name: 'login'})
 		}
 		this.secondMenu = this.menuList[0].children;
 	},

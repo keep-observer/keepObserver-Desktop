@@ -98,7 +98,6 @@ export default {
                 loading.close()
                 if(data.code === '00000'){
                     dataStoreServer.setLongData('token',data.data)
-                    console.log(data.data)
                     self.$router.push({name:'index'})
                 }else{
                     
