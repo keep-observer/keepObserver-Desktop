@@ -10,10 +10,10 @@
 			<div class="common-toggle-tab">
 				<div class="tab-header">
 					<ul>
-						<li class="active">log</li>
-						<li @click="">network</li>
-						<li @click="">system</li>
-						<li @click="">vue</li>
+						<li :class="{active:type ===1}" @click="tabChange(1)">log</li>
+						<li :class="{active:type ===2}" @click="tabChange(2)">network</li>
+						<li :class="{active:type ===3}" @click="tabChange(3)">system</li>
+						<li :class="{active:type ===4}" @click="tabChange(4)">vue</li>
 					</ul>
 				</div>
 					
@@ -27,10 +27,12 @@
 						:tableHeader="logDateTableHeader"
 						:tableContent="logDateTableList"
 						:pageSizeChange="pageSizeChange"
-						:currentChange="currentChange">
+						:currentChange="currentChange"
+						:getFormat="getFormat"
+						:buttonList="buttonList"
+						@detailRow="detailRow" >
 					</commonTable>
-						<!-- :buttonList="buttonList"
-						@detailRow="detailRow" -->
+
 				</div>
 			</div>
 
@@ -56,28 +58,19 @@ export default{
 	name:'qnz',
 	data(){
 		return{
-
-
-
-			// logDateTableList:{data:[]},
 			startTime: '',
 			endTime: '',
 			type: 1,
-
-			//果实生成记录表格配置
+			//记录表格配置
 			logDateTableHeader:[
-			    {
+				{
 			        name:'序号',
-			        prop:'orderId',
-			        width: 80
-			    },{
-			        name:'ID',
-			        prop:'id'
-			    },{
+			    },
+			    {
 			        name:'上报时间',
 			        prop:'reportTime'
 			    },{
-			        name:'上报错误内容',
+			        name:'上报内容',
 			        prop:'message'
 			    },{
 			        name:'页面位置',
@@ -87,6 +80,7 @@ export default{
 			        prop:'customeInfo'
 			    }
 			],
+			buttonList:[{eventName:'查看详情'}],
 			logDateTableList: {data:[]},
 		}
 	},
@@ -98,7 +92,7 @@ export default{
 	},
 	created(){
 		this.initParmas();
-		this.initSearchList()
+		this.initSearchList();
 	},
 	methods:{
 		//根据缓存值初始化塞筛选字段的值
@@ -106,10 +100,7 @@ export default{
 			var self = this;
         	var params = cacheRequestServices.getParams(commonModel.getQnzList);
 	        if(params){
-	            self.startTime = typeof params.startTime !== 'undefined'? params.startTime: self.startTime;
-	            self.endTime = typeof params.endTime !== 'undefined'?  params.endTime : self.endTime;
 	            self.type = typeof params.type !== 'undefined'?  params.type : self.type;
-	            
 	            self.logDateTableList.pageNo = typeof params.page!=='undefined'? params.page : self.logDateTableList.pageNo ;
 	            self.logDateTableList.pageSize = typeof params.pageSize!=='undefined'? params.pageSize : self.logDateTableList.pageSize ;
 	        }
@@ -120,10 +111,16 @@ export default{
 			var self = this;
 			var params = {
 				type: self.type,
-				pageNo: self.logDateTableList.pageNo || 10
+				pageNo: self.logDateTableList.pageNo || 1,
+				pageSize: self.logDateTableList.pageSize || 15,
+				startTime:null,
+				endTime:null,
 			}
 			cacheRequestServices.initRouteRequest(commonModel.getQnzList,function(data){
-				self.logDateTableList = data.data;
+				self.logDateTableList.data = data.data.list
+				self.logDateTableList.pageNo = data.data.pageNo
+				self.logDateTableList.pageSize = data.data.pageSize
+				self.logDateTableList.totalCount = data.data.total
 			},params);
 		},
 
@@ -131,19 +128,19 @@ export default{
 		searchList(){
 			var self = this;
 			var obj = {
-				page: self.logDateTableList.pageNo,
+				type:self.type,
+				pageNo: self.logDateTableList.pageNo,
 				pageSize: self.logDateTableList.pageSize,
 			}
 
-			if(self.filterDate[0].value){
-				obj.username = self.filterDate[0].value.trim();
+			if(self.startTime !== null && typeof self.startTime === 'number'){
+				obj.startTime = self.startTime;
 			}
-			if(self.filterDate[1].value !== null && self.filterDate[1].value !== undefined){
-				obj.status = self.filterDate[1].value;
+
+			if(self.endTime !== null && typeof self.startTime === 'number'){
+				obj.endTime = self.endTime;
 			}
-			if(self.filterDate[2].value !== null && self.filterDate[2].value !== undefined){
-				obj.isAuthentication = self.filterDate[2].value;
-			}
+
 
         	var loading = Loading.service({text:'加载中...'});
 			cacheRequestServices.request(commonModel.getQnzList,obj,function(data){
@@ -152,32 +149,69 @@ export default{
 	                self.logDateTableList.pageNo = 1;
 	                self.searchList();
 	            }else{
-	                self.logDateTableList = data
+	                self.logDateTableList.data = data.list
+					self.logDateTableList.pageNo = data.pageNo
+					self.logDateTableList.pageSize = data.pageSize
+					self.logDateTableList.totalCount = data.total
 	            } 
 	        });
 		},
 
 
-		pageSizeChange(){
-
+		detailRow(item){
+			console.log(item)
 		},
 
-		currentChange(){
 
+		pageSizeChange(val){
+			this.logDateTableList.pageSize = val;
+			this.searchList();
 		},
+
+
+		currentChange(val){
+			this.logDateTableList.pageNo = val;
+			this.searchList();
+		},
+
+
+		getFormat(row, column, cellValue, index){
+			var self = this;
+			var value = row[column.property];
+			index = index? index: 0;
+			switch(column.label){
+				case '序号':
+					return (self.logDateTableList.pageNo - 1) * self.logDateTableList.pageSize+index+1;
+				break;
+				case '上报时间':
+					return moment(value).format("YYYY-MM-DD HH:mm:ss")
+				break;
+				default:return value
+			}
+		},
+		
+
+		//table改变
+		tabChange(type){
+			var self = this;
+			if(self.type === type){
+				return false;
+			}
+			self.type = type;
+			self.searchList();
+		},
+
+
 		//选择时间
 		changeTime(timeValue,id){
 			var self = this;
-			var strat = moment(timeValue[0]).format("YYYY-MM-DD");
-			var end = moment(timeValue[1]).format("YYYY-MM-DD");
-			if(id === 1){
-				self.fruteStartDay = strat;
-				self.fruteEndDay = end
-			}else{
-				self.growthStartDay = strat;
-				self.growthEndDay = end
-			}
+			var strat = timeValue[0].getTime();
+			var end = timeValue[1].getTime();
+		 	self.startTime = strat
+            self.endTime = end 
+            self.searchList();
 		},
+		
 		//页面刷新
 		refresh(){
 			location.reload()

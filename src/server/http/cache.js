@@ -10,7 +10,7 @@ class CacheRequestServer {
     }
 
     request(request,params,callback){
-        console.log(params)
+        // console.log(params)
         this.data[request.name] = params;
 
         // var loading = Loading.service({text:'加载中...'});

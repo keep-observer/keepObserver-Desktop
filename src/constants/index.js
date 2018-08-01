@@ -5,7 +5,7 @@
 //接口地址
 if(process.env.NODE_ENV === 'production'){
     //正式环境启用 以下配置
-    var host = 'http://120.79.123.216:8080/qnche-admin'
+    var host = 'http://jiankong.qnche.com'
 }else{
     //测试环境
     var host = 'http://api.pzhwangkai.com'

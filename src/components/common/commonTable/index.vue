@@ -2,7 +2,7 @@
 	<div class="common-table">
 		<el-table
 			border 
-			:data="tableContent.data || tableContent"
+			:data="noPagination?tableContent:tableContent.data"
 			stripe
 			:style="tableWidth"
 			:cellStyle="cellStyle || $parent.cellStyle">
@@ -58,15 +58,23 @@
 
 export default{
 	name:'commonTable',
-	props:['tableHeader','tableContent','buttonList','tableWidth','getFormat','cellStyle','pageSizeChange','currentChange','noPagination'],
+	props:[
+		'tableHeader',
+		'tableContent',
+		'buttonList',
+		'tableWidth',
+		'getFormat',
+		'cellStyle',
+		'pageSizeChange',
+		'currentChange',
+		'noPagination'],
 	data(){
 		return{
 			buttonArray:[],
-			pageArray:[10, 20, 50, 100]
+			pageArray:[15]
 		}
 	},
 	mounted(){
-
 		if(!this.buttonList){
 			this.buttonArray = []
 		}else{

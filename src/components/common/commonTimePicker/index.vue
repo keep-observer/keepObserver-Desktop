@@ -77,7 +77,6 @@ export default{
 	},
 	methods:{
 		changeTime:function(){
-			console.log('时间组件')
 			this.$emit('changeTime',this.timeValue);
 		}
 	}

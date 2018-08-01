@@ -32,9 +32,6 @@ export default function request(config,callback){
         }else if(config.data){
             requestConfig.data = config.data
         }
-        
-        console.log(requestConfig)
-        // return;
 
 
         axios(requestConfig).then(function(res){
