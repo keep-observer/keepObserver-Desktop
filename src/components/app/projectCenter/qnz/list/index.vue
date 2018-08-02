@@ -19,7 +19,12 @@
 					
 				<div class="tab-comtent">
 					<p class="choose-time">
-						<common-time-picker @changeTime="changeTime"></common-time-picker>&nbsp;&nbsp;
+						<common-time-picker 
+							:startTime="startTime"
+							:endTime="endTime"
+							@changeTime="changeTime"
+						>		
+						</common-time-picker>&nbsp;&nbsp;
 						<el-button type="primary">查询</el-button>
 					</p>
 					
@@ -71,16 +76,18 @@ export default{
 			        prop:'reportTime'
 			    },{
 			        name:'上报内容',
-			        prop:'message'
+			        prop:'message',
+			        height:150,
 			    },{
 			        name:'页面位置',
 			        prop:'localtion'
 			    },{
 			        name:'自定义参数',
-			        prop:'customeInfo'
+			        prop:'customeInfo',
+			        height:150,
 			    }
 			],
-			buttonList:[{eventName:'查看详情'}],
+			buttonList:[{eventName:'查看详情',eventMethod:'detail'}],
 			logDateTableList: {data:[]},
 		}
 	},
@@ -91,6 +98,8 @@ export default{
 		commonLineChart,
 	},
 	created(){
+		this.startTime = moment().subtract(7, 'days').valueOf();
+		this.endTime = moment().valueOf();
 		this.initParmas();
 		this.initSearchList();
 	},
@@ -101,8 +110,8 @@ export default{
         	var params = cacheRequestServices.getParams(commonModel.getQnzList);
 	        if(params){
 	            self.type = typeof params.type !== 'undefined'?  params.type : self.type;
-	            self.logDateTableList.pageNo = typeof params.page!=='undefined'? params.page : self.logDateTableList.pageNo ;
-	            self.logDateTableList.pageSize = typeof params.pageSize!=='undefined'? params.pageSize : self.logDateTableList.pageSize ;
+	            self.logDateTableList.pageNo = typeof params.page!=='undefined'? params.page : 1 ;
+	            self.logDateTableList.pageSize = typeof params.pageSize!=='undefined'? params.pageSize : 15 ;
 	        }
 		},
 
@@ -159,7 +168,10 @@ export default{
 
 
 		detailRow(item){
-			console.log(item)
+			this.$router.push({name:'qnzDetail',params:{
+				type:this.type,
+				id:item.id
+			}})
 		},
 
 
@@ -212,6 +224,7 @@ export default{
             self.searchList();
 		},
 		
+
 		//页面刷新
 		refresh(){
 			location.reload()

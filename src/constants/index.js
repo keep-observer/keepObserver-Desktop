@@ -8,7 +8,8 @@ if(process.env.NODE_ENV === 'production'){
     var host = 'http://jiankong.qnche.com'
 }else{
     //测试环境
-    var host = 'http://api.pzhwangkai.com'
+    // var host = 'http://api.pzhwangkai.com' 
+    var host = 'http://jiankong.qnche.com'
 }
 
 

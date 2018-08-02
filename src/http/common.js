@@ -33,4 +33,13 @@ export default {
         })
     },
 
+    //全能赚监控数据详情
+    getQnzDetail:function(data){
+        return httpRequestServer({
+            method: 'POST',
+            url: '/admin/project/qnz/detail',
+            data: data
+        })
+    }
+
 }

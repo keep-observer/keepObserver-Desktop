@@ -9,13 +9,18 @@
 		<el-menu
 			class="el-menu-header"
 			mode="horizontal" 
+			:default-active="$route.path" 
 			background-color="#2d303b"
   			active-text-color="#409eff"
 			text-color="#fff"
 			menu-trigger="click"
 		>
-
-			<el-menu-item v-for="(item,index) in menuList" :index="index + ''" :key="index" @click="chooseList(index)">
+			<el-menu-item 
+				v-for="(item,index) in menuList" 
+				:index="'/'+item.idnexPageName" 
+				:key="index" 
+				@click="chooseList(index)"
+			>
 				<i class="fa fa-lg" :class="'fa-' + item.icoName"></i>
 				{{item.name}}
 			</el-menu-item>
@@ -57,6 +62,8 @@ export default{
 	          	self.$router.push({name: 'login'})
 	        }).catch(() => {});
 		}
+	},
+	mounted(){
 	}
 }
 </script>

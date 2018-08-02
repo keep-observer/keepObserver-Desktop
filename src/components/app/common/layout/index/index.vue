@@ -40,8 +40,9 @@ export default{
 								{
 									icoName: '',
 									name: '全能赚',
+									key:'qnz',
 									link: '/qnz'
-								}
+								},
 							]
 						},
 					]
@@ -59,7 +60,12 @@ export default{
 		if(!dataStoreServer.getLongData('token')){
 			this.$router.push({name: 'login'})
 		}
-		this.secondMenu = this.menuList[0].children;
+		if(this.$route.name.indexOf('qnz') > -1){
+			var index = 1
+		}else{
+			var index = 0
+		}
+		this.secondMenu = this.menuList[index].children;
 	},
 	methods:{
 		updateMenu(index){

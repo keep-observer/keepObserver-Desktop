@@ -19,6 +19,7 @@ import moment from 'moment'
 
 export default{
 	name:"timePicker",
+	props:['startTime','endTime'],
 	data(){
 		return {
 			timeValue: '',
@@ -72,8 +73,8 @@ export default{
 		}
 	},
 	created:function(){
-		// this.timeValue = this.defaultTime || [null,null]
-	    // this.changeTime()
+		this.timeValue = this.startTime? [new Date(this.startTime),new Date(this.endTime)] : [null,null]
+	    this.changeTime()
 	},
 	methods:{
 		changeTime:function(){

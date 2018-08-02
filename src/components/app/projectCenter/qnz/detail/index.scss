@@ -1,0 +1,28 @@
+
+
+.label{
+	font-size:18px;
+	margin-bottom:20px;
+	span{
+		margin-left:20px;
+	}
+}
+
+
+.content{
+	font-size:16px;
+	margin-top:60px;
+	.title{
+		margin-bottom:10px;
+	}
+	.text{
+		text-indent:25px;
+		max-width: 500px; 
+		max-height: 700px;
+		word-wrap:break-word;
+		overflow: auto;
+	}
+}
+
+
+
