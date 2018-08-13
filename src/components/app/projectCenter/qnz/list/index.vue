@@ -25,7 +25,7 @@
 							@changeTime="changeTime"
 						>		
 						</common-time-picker>&nbsp;&nbsp;
-						<el-button type="primary">查询</el-button>
+						<el-button type="primary" @click="searchList">查询</el-button>
 					</p>
 					
 					<commonTable 
@@ -70,10 +70,12 @@ export default{
 			logDateTableHeader:[
 				{
 			        name:'序号',
+			        width: 100
 			    },
 			    {
 			        name:'上报时间',
-			        prop:'reportTime'
+			        prop:'reportTime',
+			        width:180
 			    },{
 			        name:'上报内容',
 			        prop:'message',
@@ -98,10 +100,10 @@ export default{
 		commonLineChart,
 	},
 	created(){
+		this.initSearchList();
+		this.initParmas();
 		this.startTime = moment().subtract(7, 'days').valueOf();
 		this.endTime = moment().valueOf();
-		this.initParmas();
-		this.initSearchList();
 	},
 	methods:{
 		//根据缓存值初始化塞筛选字段的值
@@ -118,19 +120,12 @@ export default{
 		//初始化请求身份审核列表
 		initSearchList(){
 			var self = this;
-			var params = {
-				type: self.type,
-				pageNo: self.logDateTableList.pageNo || 1,
-				pageSize: self.logDateTableList.pageSize || 15,
-				startTime:null,
-				endTime:null,
-			}
 			cacheRequestServices.initRouteRequest(commonModel.getQnzList,function(data){
 				self.logDateTableList.data = data.data.list
 				self.logDateTableList.pageNo = data.data.pageNo
 				self.logDateTableList.pageSize = data.data.pageSize
 				self.logDateTableList.totalCount = data.data.total
-			},params);
+			});
 		},
 
 		//查询列表
@@ -149,8 +144,6 @@ export default{
 			if(self.endTime !== null && typeof self.startTime === 'number'){
 				obj.endTime = self.endTime;
 			}
-
-
         	var loading = Loading.service({text:'加载中...'});
 			cacheRequestServices.request(commonModel.getQnzList,obj,function(data){
 				loading.close();
@@ -220,8 +213,7 @@ export default{
 			var strat = timeValue[0].getTime();
 			var end = timeValue[1].getTime();
 		 	self.startTime = strat
-            self.endTime = end 
-            self.searchList();
+            self.endTime = end
 		},
 		
 

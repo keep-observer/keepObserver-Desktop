@@ -27,7 +27,6 @@ export default{
 	            shortcuts: [{
 	              text: '今天',
 	              onClick(picker) {
-	              	// const dayDate = moment(new Date().getTime()).format('YYYY-MM-DD')
 	                const end = new Date();
               		const start = new Date();
 	                picker.$emit('pick', [start, end]);
@@ -35,7 +34,6 @@ export default{
 	            }, {
 	              text: '最近三天',
 	              onClick(picker) {
-	              	// const dayDate = moment(new Date().getTime()).format('YYYY-MM-DD')
 	                const end = new Date();
               		const start = new Date();
 	                start.setTime(start.getTime() - 3600 * 1000 * 24 * 3);
@@ -44,7 +42,6 @@ export default{
 	            }, {
 	              text: '最近一周',
 	              onClick(picker) {
-	              	// const dayDate = moment(new Date().getTime()).format('YYYY-MM-DD')
 	                const end = new Date();
               		const start = new Date();
 	                start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
@@ -53,7 +50,6 @@ export default{
 	            }, {
 	              text: '最近一个月',
 	              onClick(picker) {
-	              	// const dayDate = moment(new Date().getTime()).format('YYYY-MM-DD')
 	                const end = new Date();
               		const start = new Date();
 	                start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
@@ -62,7 +58,6 @@ export default{
 	            }, {
 	              text: '最近三个月',
 	              onClick(picker) {
-	              	// const dayDate = moment(new Date().getTime()).format('YYYY-MM-DD')
 	                const end = new Date();
               		const start = new Date();
 	                start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);

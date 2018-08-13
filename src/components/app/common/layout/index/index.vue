@@ -1,8 +1,8 @@
 <template>
 	<div class="page-container">
 		<nav-header :token="token" :menuList="menuList" @toggleSubmitMenu="updateMenu"></nav-header>
-		<nav-slider :menuList="secondMenu"></nav-slider>
-		<div class="main-container">
+		<nav-slider :menuList="secondMenu" :showSlider="!secondMenu"></nav-slider>
+		<div class="main-container" :class="{'hidden-slider': !secondMenu}">
 			<router-view></router-view>
 		</div>
 	</div>

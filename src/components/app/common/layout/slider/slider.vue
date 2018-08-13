@@ -1,5 +1,6 @@
 <template>
-	<div class="nav-layout">			
+	<div class="nav-slider"
+		:class="{'hidden':showSlider}">			
 		<el-menu
 			ref="slider"
 			:default-active="$route.path" 
@@ -33,7 +34,7 @@ export default{
 		return{
 		};
 	},
-	props:['menuList'],
+	props:['menuList','showSlider'],
 	methods:{
 		handleOpen(key, keyPath) {
 	        console.log(key, keyPath);

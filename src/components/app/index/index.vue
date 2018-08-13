@@ -61,6 +61,7 @@ export default{
 
 				    	if(Array.isArray(statList[key]) && statList[key].length > 0){
 				    		var firstData = statList[key][0]
+				    			console.log(firstData.project)
 				    		for(var objKey in firstData.project){
 				    			item.date.push({
 				    				name: '',
@@ -68,16 +69,18 @@ export default{
 				    			})
 				    		}
 				    	}
-				    	//这个循环生成 [{name:'',date:[]},{name:'',date:[]}]
+
+
 				    	for(var i = 0, len = statList[key].length; i < len; i++){
 				    		item[key].push(statList[key][i].date);					//日期数组添加项
 				    		var k = 0;
 				    		for(var objKey in statList[key][i].project){
-				    			item.date[k].name = objKey;
-				    			item.date[k].data.push(statList[key][i].project[objKey]);
+				    			if(item.date[k]){
+				    				item.date[k].name = objKey;
+					    			item.date[k].data.push(statList[key][i].project[objKey]);
+				    			}
 				    			k++;
 				    		}
-				    		
 				    	}
 				    	self.dateList.push(item)
 				    }
